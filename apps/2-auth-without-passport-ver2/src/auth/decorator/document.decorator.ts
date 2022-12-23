@@ -1,5 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
+  ApiConflictResponse,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
@@ -18,6 +19,9 @@ const decorators: Record<API_DOC_TYPE, Function> = {
       ApiCreatedResponse({
         description: 'Success Signup',
         type: '',
+      }),
+      ApiConflictResponse({
+        description: 'User with username already exists',
       }),
     ),
   login: () =>

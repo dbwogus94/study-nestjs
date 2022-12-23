@@ -1,5 +1,13 @@
 import { ApiControllerDocument } from '@lib/common';
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import {
+  Body,
+  ConflictException,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { API_DOC_TYPE } from './constant/document.constant';
 import { DocumentHelper } from './decorator/document.decorator';
@@ -19,6 +27,13 @@ export class AuthController {
   @HttpCode(204)
   @Post('/singup')
   async signup(@Body() signupDto: SignupRequestDTO) {
+    const { username } = signupDto;
+    const user = this.userService.findUser(username);
+    if (user) {
+      throw new ConflictException(
+        `User with username ${username} already exists`,
+      );
+    }
     this.userService.createUser(signupDto);
   }
 
@@ -26,8 +41,23 @@ export class AuthController {
   @HttpCode(201)
   @Post('/login')
   login(@Body() loginDto: LoginRequestDTO) {
-    return this.authService.login();
-    // access 발급
+    const { username, password } = loginDto;
+    const user = this.userService.findUser(username);
+    if (user) {
+      throw new UnauthorizedException();
+    }
+
+    const checkPassword = this.authService.verifyHashed(
+      user.password,
+      password,
+    );
+    if (!checkPassword) {
+      throw new UnauthorizedException();
+    }
+    const { accessToken, refreshToken } = this.authService.issueToken(username);
+    // refreshToken 저장
+
+    return { accessToken };
   }
 
   @DocumentHelper(API_DOC_TYPE.ME)

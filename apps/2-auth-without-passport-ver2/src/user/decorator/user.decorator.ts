@@ -24,8 +24,8 @@ export function PropertyHelper(
   propertyName: PropertiesType,
 ): PropertyDecorator {
   return applyDecorators(
-    docsdecorators[propertyName](),
-    validDecorators[propertyName](),
+    DocumentHelper(propertyName),
+    ValidateHelper(propertyName),
   );
 }
 
@@ -49,21 +49,21 @@ const validDecorators: DecoratorType = {
 };
 
 // TODO: 공통화를 위해 테스트 진행중
-// export function DocumentHelper<T, K extends keyof T>(
+// export function DocumentHelper1<T, K extends keyof T>(
 //   entity: Type<T>,
 //   propertyName: K,
 // ): PropertyDecorator {
 //   return docdecorators[propertyName]();
 // }
 
-// export function ValidateHelper<T, K extends keyof T>(
+// export function ValidateHelper1<T, K extends keyof T>(
 //   entity: Type<T>,
 //   propertyName: K,
 // ): PropertyDecorator {
 //   return validDecorators[propertyName]();
 // }
 
-// export function PropertyHelper<T, K extends keyof T>(
+// export function PropertyHelpe1r<T, K extends keyof T>(
 //   entity: Type<T>,
 //   propertyName: K,
 // ): PropertyDecorator {

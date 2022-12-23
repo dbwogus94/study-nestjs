@@ -7,6 +7,11 @@ import { SignupRequestDTO } from '../auth/dto/request/signup-request.dto';
 @Injectable()
 export class UserService {
   private userStorage: User[] = [];
+
+  findUser(username: string): User | undefined {
+    return this.userStorage.find((user) => user.username === username);
+  }
+
   createUser(signupDto: SignupRequestDTO): UserWithoutPassword {
     const newUser = Util.toInstance(User, {
       ...signupDto,

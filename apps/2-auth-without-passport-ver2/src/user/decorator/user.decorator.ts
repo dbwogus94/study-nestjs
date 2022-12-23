@@ -4,7 +4,7 @@ import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { User } from '../entity/user.entity';
 
-type PropertiesType = keyof User;
+type PropertiesType = keyof Omit<User, 'toUserWithoutPassword'>;
 // eslint-disable-next-line @typescript-eslint/ban-types
 type DecoratorType = Record<PropertiesType, Function>;
 

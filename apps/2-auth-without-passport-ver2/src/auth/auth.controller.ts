@@ -4,18 +4,22 @@ import { AuthService } from './auth.service';
 import { API_DOC_TYPE } from './constant/document.constant';
 import { DocumentHelper } from './decorator/document.decorator';
 import { LoginRequestDTO } from './dto/request/login-request.dto';
-import { SingupRequestDTO } from './dto/request/signup-request.dto';
+import { SignupRequestDTO } from './dto/request/signup-request.dto';
+import { UserService } from '../user/user.service';
 
 @ApiControllerDocument('auth')
 @Controller('/auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UserService,
+  ) {}
 
   @DocumentHelper(API_DOC_TYPE.SIGNUP)
   @HttpCode(204)
   @Post('/singup')
-  async signup(@Body() signupDto: SingupRequestDTO) {
-    // user 서비스에서 insert 진행
+  async signup(@Body() signupDto: SignupRequestDTO) {
+    this.userService.createUser(signupDto);
   }
 
   @DocumentHelper(API_DOC_TYPE.LOGIN)

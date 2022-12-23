@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { SingupRequestDTO } from './dto/request/signup-request.dto';
 
 @Injectable()
 export class AuthService {
-  signup(signupDto: SingupRequestDTO) {
+  signup() {
     return;
   }
 

@@ -2,7 +2,7 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { User } from './user.entity';
+import { User } from '../entity/user.entity';
 
 type PropertiesType = keyof User;
 // eslint-disable-next-line @typescript-eslint/ban-types

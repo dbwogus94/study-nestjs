@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AppConfig } from './config/app/app.config';
 import { localConfig } from './config/app/environment/local';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { localConfig } from './config/app/environment/local';
       load: [() => AppConfig.validate(localConfig)],
     }),
     AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

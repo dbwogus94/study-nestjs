@@ -1,4 +1,5 @@
-import { PropertyHelper, User } from '../../../user';
+import { PropertyHelper } from '@app/2-auth-without-passport-ver2/user/decorator';
+import { User } from '@app/2-auth-without-passport-ver2/user/entity';
 
 type SingupRequest = Pick<User, 'password' | 'username' | 'email'>;
 

@@ -1,5 +1,6 @@
 import { SwaggerConfig } from '@lib/config';
 import { BaseConfig } from '@lib/config';
+import { JwtConfig } from '@lib/config/jwt';
 import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
@@ -21,4 +22,9 @@ export class AppConfig extends BaseConfig {
   @ValidateNested()
   @Type(() => SwaggerConfig)
   readonly swagger: SwaggerConfig;
+
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => JwtConfig)
+  readonly jwt: JwtConfig;
 }

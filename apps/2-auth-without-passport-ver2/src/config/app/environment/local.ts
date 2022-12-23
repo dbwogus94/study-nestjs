@@ -4,6 +4,7 @@ import { AppConfig } from '../app.config';
 export const localConfig: AppConfig = {
   appName: '2-auth-without-passport-ver2',
   port: +3000,
+  jwt: { secret: '$up3r$3cr3t' },
   swagger: {
     docsOption: {
       info: {

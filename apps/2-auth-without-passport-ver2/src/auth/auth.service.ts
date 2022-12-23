@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { SingupRequestDTO } from './dto/request/signup-request.dto';
 
 @Injectable()
 export class AuthService {
-  signup() {
-    throw new Error('미구현 API');
+  signup(signupDto: SingupRequestDTO) {
+    return;
   }
 
   login() {

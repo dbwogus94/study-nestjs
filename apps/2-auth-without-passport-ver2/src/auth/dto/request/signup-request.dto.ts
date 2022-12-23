@@ -1,8 +1,8 @@
-import { PropertyHelper, User } from '../../user';
+import { PropertyHelper, User } from '../../../user';
 
 type SingupRequest = Pick<User, 'password' | 'username' | 'email'>;
 
-export class SingupRequestDto implements SingupRequest {
+export class SingupRequestDTO implements SingupRequest {
   @PropertyHelper('password')
   password: string;
   @PropertyHelper('username')

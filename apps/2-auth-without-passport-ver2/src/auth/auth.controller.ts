@@ -3,7 +3,8 @@ import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { API_DOC_TYPE } from './constant/document.constant';
 import { DocumentHelper } from './decorator/document.decorator';
-import { SingupRequestDto } from './dto/request/signup-request.dto';
+import { LoginRequestDTO } from './dto/request/login-request.dto';
+import { SingupRequestDTO } from './dto/request/signup-request.dto';
 
 @ApiControllerDocument('auth')
 @Controller('/auth')
@@ -11,17 +12,18 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @DocumentHelper(API_DOC_TYPE.SIGNUP)
-  @HttpCode(201)
+  @HttpCode(204)
   @Post('/singup')
-  signup(@Body() user: SingupRequestDto) {
-    return this.authService.signup();
+  async signup(@Body() signupDto: SingupRequestDTO) {
+    // user 서비스에서 insert 진행
   }
 
   @DocumentHelper(API_DOC_TYPE.LOGIN)
   @HttpCode(201)
   @Post('/login')
-  login() {
+  login(@Body() loginDto: LoginRequestDTO) {
     return this.authService.login();
+    // access 발급
   }
 
   @DocumentHelper(API_DOC_TYPE.ME)
